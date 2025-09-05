@@ -1,0 +1,7 @@
+{
+  "terminal.integrated.env.linux": {
+    "DOTNET_ROOT": "/home/robins/.dotnet",
+    "PATH": "/home/robins/.dotnet:${env:PATH}"
+  },
+  "dotnetAcquisitionExtension.sharedExistingDotnetPath": "/home/robins/.dotnet/dotnet"
+}

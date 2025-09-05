@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build solution",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/OpenBlazor.sln",
+        "--configuration", "Debug"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "options": {
+        "env": {
+          "DOTNET_ROOT": "/home/robins/.dotnet",
+          "PATH": "/home/robins/.dotnet:${env:PATH}"
+        }
+      }
+    },
+    {
+      "label": "build OpenBlazor.Showcase",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/OpenBlazor.Showcase/OpenBlazor.Showcase.csproj",
+        "--configuration", "Debug"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "options": {
+        "env": {
+          "DOTNET_ROOT": "/home/robins/.dotnet",
+          "PATH": "/home/robins/.dotnet:${env:PATH}"
+        }
+      }
+    }
+  ]
+}
