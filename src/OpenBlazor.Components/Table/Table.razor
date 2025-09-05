@@ -1,0 +1,95 @@
+@using Microsoft.AspNetCore.Components 
+@using Microsoft.AspNetCore.Components.Web
+
+@using OpenBlazor.Components.Table
+
+@namespace OpenBlazor.Components
+
+@typeparam TItem
+
+@if (!_columnsInitialized) 
+{ 
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent 
+    </CascadingValue> 
+} 
+else 
+{ 
+    <div class="ob-table">
+        <div class="ob-table-header-area">
+            @foreach (Column<TItem> column in _columns)
+            {
+                <div class="ob-table-header">@column.Header</div>
+            }
+        </div>
+
+        <div class="ob-table-row-area">
+            @foreach (TItem row in TableData)
+            {
+                <div class="ob-table-row">
+                    @foreach (Column<TItem> column in _columns)
+                    {
+                        var val = column.Selector(row);
+                        var text = column.Formatter?.Invoke(val) ?? val?.ToString() ?? "";
+                        <div class="ob-table-cell">@text</div>
+                    }                       
+                </div>        
+            }
+        </div> 
+    </div> 
+} 
+
+@code 
+{ 
+    #region Parameters
+
+    [Parameter] 
+    public List<TItem> TableData { get; set; } = new();
+
+    [Parameter] 
+    public RenderFragment? ChildContent { get; set; } 
+
+    #endregion 
+
+    #region Properties 
+
+    #endregion 
+
+    #region Fields private 
+
+    bool _columnsInitialized = false;
+
+    private readonly List<Column<TItem>> _columns = new(); 
+
+    #endregion 
+    
+    #region Methods - overrides 
+
+    protected override void OnAfterRender(bool firstRender) 
+    { 
+        if (firstRender) 
+        { 
+            _columnsInitialized = true; 
+            StateHasChanged(); 
+        } 
+    } 
+
+    #endregion 
+
+    #region Methods - public 
+
+    public void Register(Column<TItem> column) 
+    { 
+        if (!_columns.Contains(column)) 
+        { 
+            _columns.Add(column); 
+        } 
+    } 
+
+    #endregion 
+
+    #region Methods - private 
+
+
+    #endregion 
+}
