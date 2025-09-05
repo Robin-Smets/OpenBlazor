@@ -2,7 +2,7 @@
 @using OpenBlazor.Components.Table
 
 @page "/weather"
-@attribute [StreamRendering]
+@rendermode InteractiveServer
 
 <PageTitle>Weather</PageTitle>
 
@@ -17,7 +17,7 @@
 else
 {
     <Table TItem="WeatherForecast" TableData="forecasts.ToList()">
-        <Column TItem="WeatherForecast" Header="Date" Selector="row => row.Date"/>
+        <Column TItem="WeatherForecast" Header="Date" Selector="row => row.Date.ToShortDateString()"/>
         <Column TItem="WeatherForecast" Header="TemperatureC" Selector="row => row.TemperatureC"/>
         <Column TItem="WeatherForecast" Header="Summary" Selector="row => row.Summary"/>
         <Column TItem="WeatherForecast" Header="TemperatureF" Selector="row => row.TemperatureF"/>
